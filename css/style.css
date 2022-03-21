@@ -12,17 +12,10 @@ h1 {
 main {
    max-width: 1000px;
    height: 100%;
+   min-height: 620px;
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
-}
-
-img {
-   max-width: 100%;
-   width: 100%;
-   max-height: 45vh;
-   object-fit: cover;
-   margin-top: -0.5rem;
 }
 
 label {
@@ -75,4 +68,13 @@ button {
 .login-text {
    display: block;
    text-align: center;
+}
+
+.vector {
+   max-width: 100%;
+   width: 100%;
+   max-height: 45vh;
+   min-height: 300px;
+   object-fit: cover;
+   margin-top: -0.5rem;
 }
