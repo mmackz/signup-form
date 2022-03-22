@@ -3,7 +3,15 @@
 body {
    height: calc(100vh - var(--vh-offset, 0px));
    font-family: 'Manrope', sans-serif;
-   min-height: 620px;
+   min-height: max(calc(100vh - var(--vh-offset, 0px)), 620px);
+   background: url(../images/blob-bg.svg) no-repeat;
+   background-size: cover;
+}
+
+a {
+   font-weight: bold;
+   text-decoration: none;
+   white-space: nowrap;
 }
 
 h1 {
@@ -15,19 +23,23 @@ main {
    height: 100%;
    display: flex;
    flex-direction: column;
-   justify-content: space-evenly;
+   justify-content: space-around;
 }
 
 label {
    margin-right: 0.5rem;
+   font-size: 1.25rem;
+   color: #a1a1a1;
 }
 
 input {
+   font-family: 'Jaldi', sans-serif;
    border: none;
+   background-color: transparent;
    border-bottom: 1px solid #a1a1a1;
-   padding: 0.5rem 0;
+   padding: max(0.5rem, 1.35vh) 0.25rem;
    width: 100%;
-   margin: 0.25rem 0;
+   margin: 0.25rem 0.4rem;
 }
 
 input:focus {
@@ -48,7 +60,8 @@ button {
 }
 
 .form-container {
-   margin-top: -2rem;
+   position: relative;
+   top: -2rem;
    padding: 0 1.75rem;
 }
 
@@ -59,10 +72,15 @@ button {
 .input-group {
    display: flex;
    align-items: center;
+   font-size: 1.1rem;
+}
+
+.lock {
+   width: 1.25rem;
 }
 
 .legal {
-   font-size: 0.625rem;
+   font-size: 0.675rem;
 }
 
 .login-text {
@@ -76,5 +94,4 @@ button {
    max-height: 45vh;
    min-height: 300px;
    object-fit: cover;
-   margin-top: -0.5rem;
 }
