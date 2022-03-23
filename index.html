@@ -12,7 +12,7 @@
       <script src="js/index.js" defer></script>
       <script src="js/owasp-password-strength-test.js"></script>
       <script src="https://unpkg.com/vh-check/dist/vh-check.min.js"></script>
-      <link href="https://fonts.googleapis.com/css2?family=Jaldi&family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Jaldi&family=Manrope:wght@400;700&display=swap" rel="stylesheet"/>
       <script
          src="https://kit.fontawesome.com/6faef4fc76.js"
          crossorigin="anonymous"
@@ -31,45 +31,84 @@
          <section class="form-container">
             <h1>Sign up</h1>
             <form spellcheck="false" autocomplete="off">
-
                <div class="form-inputs">
                   <div class="input-group">
-                     <div class="error hide"></div>
+                     <div class="error hide">Name cannot be empty</div>
                      <label for="name"><i class="fa-regular fa-user"></i></label>
-                     <input id="name" type="text" name="name" placeholder="Full name" required />
+                     <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        placeholder="Full name"
+                        required
+                     />
                   </div>
-   
+
                   <div class="input-group">
-                     <div class="error hide"></div>
+                     <div class="error hide">Email is not valid</div>
                      <label for="email"><i class="fa-regular fa-at"></i></label>
-                     <input type="email" id="email" placeholder="Email" name="email" required />
+                     <input
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        name="email"
+                        required
+                     />
                   </div>
-   
+
                   <div class="input-group">
-                     <div class="error hide"></div>
-                     <label for="password"><img class="lock" src="images/lock.svg" alt="lock"></label>
-                     <input id="password" type="password" placeholder="Password" name="password" required />
+                     <div class="error hide">Password is not strong enough</div>
+                     <label for="password"
+                        ><img class="lock" src="images/lock.svg" alt="lock"
+                     /></label>
+                     <input
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        name="password"
+                        required
+                     />
                      <div class="indicator hide">
                         <span class="weak"></span>
                         <span class="medium transparent"></span>
                         <span class="strong transparent"></span>
                      </div>
                   </div>
-   
+
                   <div class="input-group">
-                     <div class="error hide"></div>
-                     <label for="confirm"><img class="lock" src="images/lock.svg" alt="lock"></label>
-                     <input type="password"id="confirm" placeholder="Confirm password" required />
+                     <div class="error hide">Passwords do not match</div>
+                     <label for="confirm"><img class="lock" src="images/lock.svg" alt="lock"/></label>
+                     <input
+                        type="password"
+                        id="confirm"
+                        placeholder="Confirm password"
+                        required
+                     />
                   </div>
                </div>
-               
-               
+
                <small class="legal">
                   By signing up, you are agreeing to our
                   <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
                </small>
-               <button>Continue</button>
-               <small class="login-text">Already have an account? <a href="#">Login</a></small>
+               <button>
+                  <span>Continue</span>
+                  <svg
+                     class="checkmark hide"
+                     xmlns="http://www.w3.org/2000/svg"
+                     viewBox="0 0 52 52"
+                  >
+                     <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                     <path
+                        class="checkmark__check"
+                        fill="none"
+                        d="M14.1 27.2l7.1 7.2 16.7-16.8"
+                     />
+                  </svg>
+               </button>
+               <small class="login-text"
+                  >Already have an account? <a href="#">Login</a></small
+               >
             </form>
          </section>
       </main>

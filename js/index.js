@@ -50,7 +50,6 @@ setTimeout(() => {
    setBlurMask();
 }, 10);
 
-
 // highlight form field on focus
 document.querySelectorAll(".input-group").forEach((group) => {
    group.addEventListener("focusin", (event) => {
@@ -64,12 +63,17 @@ document.querySelectorAll(".input-group").forEach((group) => {
       }
    });
 
+
+   // validates on focusout
    group.addEventListener("focusout", (event) => {
       const target = event.currentTarget;
       target.classList.remove("active");
       target.children[2].classList.remove("active");
-      validateInput(target.children[2]);
+      const valid = validateInput(target.children[2]);
       document.querySelector(".indicator").classList.add("hide");
+      if (!valid) {
+         showError(target.children[2]);
+      }
    });
 });
 
@@ -93,8 +97,7 @@ document.querySelectorAll("input").forEach((input) => {
          } else if (document.querySelector("button").classList.contains("strong")) {
             document.querySelector("button").classList.remove("strong");
          }
-      }, 1)
-
+      }, 1);
    });
 });
 
@@ -129,20 +132,36 @@ document.querySelector("#password").addEventListener("input", (event) => {
 // shake button and invalid inputs when trying to submit with invalid/unfilled inputs
 document.querySelector("button").addEventListener("click", (event) => {
    event.preventDefault();
-   document.querySelector("button").classList.add("shake");
-
-   document.querySelectorAll("input").forEach((input) => {
-      if (!input.classList.length || input.classList.contains("invalid")) {
-         input.classList.add("shake");
-      };
+   const inputs = [...document.querySelectorAll("input")];
+   if (!inputs.every((input) => input.classList.contains("valid"))) {
+      document.querySelector("button").classList.add("shake");
+      document.querySelectorAll("input").forEach((input) => {
+         if (!input.classList.length || input.classList.contains("invalid")) {
+            input.classList.add("shake");
+         }
+         setTimeout(() => {
+            input.classList.remove("shake");
+         }, 600);
+      });
+   
       setTimeout(() => {
-         input.classList.remove("shake");
+         document.querySelector("button").classList.remove("shake");
       }, 600);
-   });
+   } else {
+      // animate checkmark on valid form submit
+      const checkmark = document.querySelector(".checkmark");
+      document.querySelector("button").firstElementChild.classList.add("invisible");
+      checkmark.classList.remove("hide");
+      setTimeout(() => {
+         checkmark.classList.add("grow");
+      }, 100);
 
-   setTimeout(() => {
-      document.querySelector("button").classList.remove("shake");
-   }, 600);
+      setTimeout(() => {
+         checkmark.classList.remove("grow");
+         checkmark.classList.add("hide");
+         document.querySelector("button").firstElementChild.classList.remove("invisible");
+      }, 2000);
+   }
 });
 
 function testStrength(password) {
@@ -175,4 +194,24 @@ function validateInput(input) {
          break;
    }
    input.classList.add(valid ? "valid" : "invalid");
+   return Boolean(valid);
 }
+
+function showError(input) {
+   const element = input.parentElement.firstElementChild;
+
+   if (input.id === "password") {
+
+   }
+
+   element.classList.remove("hide");
+   setTimeout(() => {
+      element.classList.add("fadeout");
+   }, 1000);
+
+   setTimeout(() => {
+      element.classList.add("hide");
+      element.classList.remove("fadeout");
+   }, 3000);
+}
+
