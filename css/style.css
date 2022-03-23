@@ -30,10 +30,15 @@ a:hover {
 
 h1 {
    margin: 0 0 0.5rem;
+   user-select: none;
 }
 
 i {
    margin-right: 1.1px;
+}
+
+img {
+   -webkit-user-drag: none;
 }
 
 main {
@@ -49,6 +54,7 @@ label {
    margin-right: 0.5rem;
    font-size: 1.25rem;
    color: var(--light-accent);
+   user-select: none;
 }
 
 input {
@@ -69,7 +75,7 @@ input:focus {
 /* hack to remove autofill styles */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
-  transition: background-color 600000s 0s, color 600000s 0s;
+   transition: background-color 600000s 0s, color 600000s 0s;
 }
 
 button {
@@ -86,6 +92,7 @@ button {
    margin: 1.25rem 0 1rem;
    transition: background-color 500ms ease;
    cursor: pointer;
+   user-select: none;
 }
 
 .form-container {
@@ -130,6 +137,8 @@ button {
 .media-container {
    display: flex;
    justify-content: center;
+   position: relative;
+   user-select: none;
 }
 
 .vector {
@@ -223,7 +232,7 @@ button {
 }
 
 .shake {
-   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+   animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
    transition: background-color 500ms ease;
 }
 
@@ -237,7 +246,7 @@ button {
    position: absolute;
    left: 50%;
    top: 50%;
-   transform: translate(-50%,-50%) !important;
+   transform: translate(-50%, -50%) !important;
    width: 12px;
    height: 12px;
    border-radius: 50%;
@@ -256,14 +265,14 @@ button {
    stroke-miterlimit: 10;
    stroke: #ffffff;
    fill: #ffffff;
-   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
 
 .checkmark-check {
    transform-origin: 50% 50%;
    stroke-dasharray: 48;
    stroke-dashoffset: 48;
-   animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+   animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
 
 .grow {
@@ -271,9 +280,18 @@ button {
    width: 28px;
 }
 
+.attr {
+   display: none;
+   position: absolute;
+   color: var(--light-accent);
+   left: 15%;
+   bottom: 15%;
+   font-size: 0.45rem;
+}
+
 @keyframes stroke {
    100% {
-       stroke-dashoffset: 0
+      stroke-dashoffset: 0;
    }
 }
 
@@ -296,16 +314,21 @@ button {
 }
 
 @keyframes shake {
-   10%, 90% {
+   10%,
+   90% {
       transform: translate3d(-1px, 0, 0);
    }
-   20%, 80% {
+   20%,
+   80% {
       transform: translate3d(2px, 0, 0);
    }
-   30%, 50%, 70% {
+   30%,
+   50%,
+   70% {
       transform: translate3d(-4px, 0, 0);
    }
-   40%, 60% {
+   40%,
+   60% {
       transform: translate3d(4px, 0, 0);
    }
 }
@@ -374,9 +397,13 @@ button {
    .error {
       left: 100%;
    }
-   
+
    .vector {
       max-width: 520px;
+   }
+
+   .attr {
+      display: block;
    }
 }
 
