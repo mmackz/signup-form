@@ -3,8 +3,8 @@ vhCheck();
 
 // scrolls to bottom to ensure form is visible when filling inputs on mobile
 document.querySelectorAll("input").forEach((input) => {
-   if (window.clientWidth < 420 && !["confirm", "password"].includes(input.id)) {
-      input.addEventListener("focus", () => {
+   if (window.innerWidth < 420) {
+      input.addEventListener("focusin", () => {
          setTimeout(() => {
             window.scrollBy(0, window.innerHeight);
          }, 150);
@@ -62,7 +62,6 @@ document.querySelectorAll(".input-group").forEach((group) => {
          document.querySelector(".indicator").classList.remove("hide");
       }
    });
-
 
    // validates on focusout
    group.addEventListener("focusout", (event) => {
@@ -127,6 +126,18 @@ document.querySelector("#password").addEventListener("input", (event) => {
          document.querySelector(".medium").classList.add("transparent");
          break;
    }
+
+   // if confirm is not empty, compare it to password
+   if (document.querySelector("#confirm").value !== "") {
+      const valid = document.querySelector("#confirm").value === event.target.value;
+      if (valid) {
+         document.querySelector("#confirm").classList.remove("invalid");
+         document.querySelector("#confirm").classList.add("valid");
+      } else {
+         document.querySelector("#confirm").classList.remove("valid");
+         document.querySelector("#confirm").classList.add("invalid");
+      }
+   }
 });
 
 // shake button and invalid inputs when trying to submit with invalid/unfilled inputs
@@ -143,7 +154,7 @@ document.querySelector("button").addEventListener("click", (event) => {
             input.classList.remove("shake");
          }, 600);
       });
-   
+
       setTimeout(() => {
          document.querySelector("button").classList.remove("shake");
       }, 600);
@@ -199,19 +210,13 @@ function validateInput(input) {
 
 function showError(input) {
    const element = input.parentElement.firstElementChild;
-
-   if (input.id === "password") {
-
-   }
-
    element.classList.remove("hide");
    setTimeout(() => {
       element.classList.add("fadeout");
-   }, 1000);
+   }, 900);
 
    setTimeout(() => {
       element.classList.add("hide");
       element.classList.remove("fadeout");
-   }, 3000);
+   }, 3200);
 }
-
