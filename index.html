@@ -10,6 +10,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <script src="index.js" defer></script>
+      <script src="owasp-password-strength-test.js"></script>
       <script src="https://unpkg.com/vh-check/dist/vh-check.min.js"></script>
       <link href="https://fonts.googleapis.com/css2?family=Jaldi&family=Manrope:wght@400;700&display=swap" rel="stylesheet">
       <script
@@ -34,21 +35,21 @@
                <div class="form-inputs">
                   <div class="input-group">
                      <label for="name"><i class="fa-regular fa-user"></i></label>
-                     <input id="name" type="text" placeholder="Full name" required />
+                     <input id="name" type="text" name="name" placeholder="Full name" required />
                   </div>
    
                   <div class="input-group">
                      <label for="email"><i class="fa-regular fa-at"></i></label>
-                     <input type="email" id="email" placeholder="Email" required />
+                     <input type="email" id="email" placeholder="Email" name="email" required />
                   </div>
    
                   <div class="input-group">
                      <label for="password"><img class="lock" src="images/lock.svg" alt="lock"></label>
-                     <input id="password" type="password" placeholder="Password" required />
-                     <div class="indicator">
+                     <input id="password" type="password" placeholder="Password" name="password" required />
+                     <div class="indicator hide">
                         <span class="weak"></span>
-                        <span class="medium"></span>
-                        <span class="strong"></span>
+                        <span class="medium transparent"></span>
+                        <span class="strong transparent"></span>
                      </div>
                   </div>
    
@@ -63,7 +64,7 @@
                   By signing up, you are agreeing to our
                   <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a>
                </small>
-               <button type="button">Continue</button>
+               <button>Continue</button>
                <small class="login-text">Already have an account? <a href="#">Login</a></small>
             </form>
          </section>

@@ -2,6 +2,10 @@
 
 :root {
    --mask: none;
+   --invalid: #fc2424;
+   --valid: #03c061;
+   --bold-accent: #0020ad;
+   --light-accent: #a1a1a1;
 }
 
 body {
@@ -16,10 +20,20 @@ a {
    font-weight: bold;
    text-decoration: none;
    white-space: nowrap;
+   transition: transform 250ms linear;
+   display: inline-block;
+}
+
+a:hover {
+   transform: scale(1.015) translateX(0.5px);
 }
 
 h1 {
    margin: 0 0 0.5rem;
+}
+
+i {
+   margin-right: 1.1px;
 }
 
 main {
@@ -34,14 +48,14 @@ main {
 label {
    margin-right: 0.5rem;
    font-size: 1.25rem;
-   color: #a1a1a1;
+   color: var(--light-accent);
 }
 
 input {
    font-family: "Jaldi", sans-serif;
    border: none;
    background-color: transparent;
-   border-bottom: 1px solid #a1a1a1;
+   border-bottom: 1px solid var(--light-accent);
    padding: max(0.5rem, 1.35vh) 0.25rem;
    width: 100%;
    margin: 0.25rem 0.4rem;
@@ -64,11 +78,13 @@ button {
    width: 100%;
    color: white;
    font-weight: bold;
-   background: #0020ad;
+   background: var(--bold-accent);
    border: none;
    border-radius: 6px;
    font-family: "Manrope", sans-serif;
    margin: 1.25rem 0 1rem;
+   transition: background-color 500ms ease;
+   cursor: pointer;
 }
 
 .form-container {
@@ -86,6 +102,10 @@ button {
    align-items: center;
    font-size: 1.1rem;
    transition: transform 200ms ease-in-out;
+}
+
+.input-group:first-child i {
+   margin-right: 3.1px;
 }
 
 .lock {
@@ -124,17 +144,17 @@ button {
 
 .active {
    transform: scale(1.03);
-   border-color: #0020ad;
+   border-color: var(--bold-accent);
    border-bottom-width: 2px;
 }
 
 .valid {
-   border-color: #03c061;
+   border-color: var(--valid);
    border-bottom-width: 2px;
 }
 
 .invalid {
-   border-color: #fc2424;
+   border-color: var(--invalid);
    border-bottom-width: 2px;
 }
 
@@ -145,16 +165,41 @@ button {
 .indicator {
    position: absolute;
    display: flex;
-   bottom: -5px;
+   bottom: -4px;
    width: 100%;
+   max-width: 120px;
 }
 
 .indicator > span {
    display: block;
    width: 33%;
    height: 2.5px;
-   border-radius: 5px;
-   background-color: #fc2424;
+   border-radius: 10px;
+   border: 1px solid black;
+}
+
+.indicator > span:nth-child(2) {
+   margin: 0 0.25rem;
+}
+
+.hide {
+   display: none !important;
+}
+
+.transparent {
+   background-color: transparent !important;
+}
+
+.weak {
+   background-color: var(--invalid);
+}
+
+.medium {
+   background-color: #fce730;
+}
+
+.strong {
+   background-color: var(--valid);
 }
 
 @media (min-width: 720px) {
@@ -177,7 +222,6 @@ button {
       padding: 2.25rem 0;
       border: 5px solid #e5f4ff;
       border-radius: 10px;
-      background-color: #ffffff00;
       box-sizing: border-box;
    }
 
@@ -209,5 +253,9 @@ button {
    main {
       padding: 2.5rem;
       padding-left: 1.5rem;
+   }
+
+   h1 {
+      font-size: 2.25rem;
    }
 }
