@@ -35,7 +35,8 @@ function placeStrengthMeter() {
    const indicator = document.querySelector(".indicator");
    const inputEl = document.querySelector("#password");
    indicator.style.width = inputEl.clientWidth * 0.4 + "px";
-   indicator.style.right = parseFloat(window.getComputedStyle(inputEl).paddingRight) + 5 + "px";
+   indicator.style.right =
+      parseFloat(window.getComputedStyle(inputEl).paddingRight) + 5 + "px";
 }
 
 window.addEventListener("resize", () => {
@@ -50,10 +51,10 @@ document.querySelectorAll(".input-group").forEach((group) => {
    group.addEventListener("focusin", (event) => {
       const target = event.currentTarget;
       target.classList.add("active");
-      target.children[1].classList.add("active")
+      target.children[2].classList.add("active");
 
       // show strength indicator when password field selected
-      if (target.children[1].id === "password") {
+      if (target.children[2].id === "password") {
          document.querySelector(".indicator").classList.remove("hide");
       }
    });
@@ -61,17 +62,44 @@ document.querySelectorAll(".input-group").forEach((group) => {
    group.addEventListener("focusout", (event) => {
       const target = event.currentTarget;
       target.classList.remove("active");
-      target.children[1].classList.remove("active");
-      validateInput(target.children[1]);
+      target.children[2].classList.remove("active");
+      validateInput(target.children[2]);
       document.querySelector(".indicator").classList.add("hide");
-
-      // turns button green when form is considered valid
-      if ([...document.querySelectorAll("input")].every((input) => input.classList.contains("valid"))) {
-         document.querySelector("button").classList.add("strong");
-      } else if (document.querySelector("button").classList.contains("strong")) {
-         document.querySelector("button").classList.remove("strong")
-      }
    });
+});
+
+// aggressively validates inputs if in invalid state
+document.querySelectorAll("input").forEach((input) => {
+   input.addEventListener("input", (event) => {
+      if (
+         event.target.classList.contains("valid") ||
+         event.target.classList.contains("invalid")
+      ) {
+         validateInput(input);
+      }
+      // turns button green when form is considered valid
+      setTimeout(() => {
+         if (
+            [...document.querySelectorAll("input")].every((input) =>
+               input.classList.contains("valid")
+            )
+         ) {
+            document.querySelector("button").classList.add("strong");
+         } else if (document.querySelector("button").classList.contains("strong")) {
+            document.querySelector("button").classList.remove("strong");
+         }
+      }, 1)
+
+   });
+});
+
+// shows valid state for password confirm field once passwords match
+document.querySelector("#confirm").addEventListener("input", (event) => {
+   const target = event.target;
+   const password = document.querySelector("#password").value;
+   if (target.value === password) {
+      target.classList.add("valid");
+   }
 });
 
 // checks password strength and fills strength bar
@@ -91,11 +119,10 @@ document.querySelector("#password").addEventListener("input", (event) => {
          document.querySelector(".medium").classList.add("transparent");
          break;
    }
-})
+});
 
 function testStrength(password) {
    const passwordTest = passwordStrengthTest.test(password);
-   console.log(passwordTest)
    if (passwordTest.strong) {
       return "strong";
    }
@@ -103,7 +130,6 @@ function testStrength(password) {
       return "medium";
    }
    return "weak";
-   
 }
 
 function validateInput(input) {
@@ -115,7 +141,7 @@ function validateInput(input) {
          valid = /^\S.*/.test(value);
          break;
       case "email":
-         valid = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(value);
+         valid = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value);
          break;
       case "password":
          valid = testStrength(value) !== "weak";
@@ -124,6 +150,5 @@ function validateInput(input) {
          valid = value && value === document.querySelector("#password").value;
          break;
    }
-   console.log(valid)
    input.classList.add(valid ? "valid" : "invalid");
 }
