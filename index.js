@@ -3,6 +3,7 @@ vhCheck();
 
 // scrolls to bottom to ensure form is visible when filling inputs
 document.querySelectorAll("input").forEach((input) => {
+   //TODO only scroll on mobile (420px or less ??)
    if (!["confirm", "password"].includes(input.id)) {
       input.addEventListener("focus", () => {
          setTimeout(() => {
@@ -12,7 +13,8 @@ document.querySelectorAll("input").forEach((input) => {
    }
 });
 
-window.addEventListener("resize", () => {
+// sets blur only on outside of the content container
+function setBlurMask() {
    const main = document.querySelector("main");
    const size = main.getBoundingClientRect();
    const blur = document.querySelector(".blur");
@@ -21,13 +23,55 @@ window.addEventListener("resize", () => {
    const leftPercent = (size.left / blurSize.width) * 100 + "%";
    const bottomPercent = (size.bottom / blurSize.height) * 100 + "%";
    const rightPercent = (size.right / blurSize.width) * 100 + "%";
-   console.log(blurSize);
-   console.log(size);
-   console.log(leftPercent);
    document
       .querySelector(":root")
       .style.setProperty(
          "--mask",
          `polygon(0% 0%, 0% 100%, ${leftPercent} 100%, ${leftPercent} ${topPercent}, ${rightPercent} ${topPercent}, ${rightPercent} ${bottomPercent}, ${leftPercent} ${bottomPercent}, ${leftPercent} 100%, 100% 100%, 100% 0%)`
       );
+}
+
+// sets width and properly centers the password strength meter
+function centerStrengthMeter() {
+   const indicator = document.querySelector(".indicator");
+   const inputEl = document.querySelector("#password");
+   indicator.style.width = inputEl.clientWidth + "px";
+   indicator.style.right = window.getComputedStyle(inputEl).paddingRight;
+}
+
+window.addEventListener("resize", () => {
+   setBlurMask();
+   centerStrengthMeter();
 });
+setBlurMask();
+centerStrengthMeter();
+
+// highlight form field on focus
+document.querySelectorAll(".input-group").forEach((group) => {
+   group.addEventListener("focusin", (event) => {
+      const target = event.currentTarget;
+      target.classList.add("active");
+   });
+
+   group.addEventListener("focusout", (event) => {
+      const target = event.currentTarget;
+      target.classList.remove("active");
+      target.lastElementChild.classList.remove("active");
+      validateInput(target.lastElementChild);
+   });
+});
+
+function validateInput(input) {
+   const { id, value } = input;
+   input.classList.remove("valid", "invalid");
+   let valid = false;
+   switch (id) {
+      case "name":
+         valid = /^\S.*/.test(value);
+         break;
+      case "email":
+         valid = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(value);
+         break;
+   }
+   input.classList.add(valid ? "valid" : "invalid");
+}

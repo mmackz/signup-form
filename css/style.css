@@ -45,10 +45,17 @@ input {
    padding: max(0.5rem, 1.35vh) 0.25rem;
    width: 100%;
    margin: 0.25rem 0.4rem;
+   transition: border-color 200ms ease-in-out, border-bottom-width 200ms ease-in-out;
 }
 
 input:focus {
    outline: none;
+}
+
+/* hack to remove autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
 }
 
 button {
@@ -78,6 +85,7 @@ button {
    display: flex;
    align-items: center;
    font-size: 1.1rem;
+   transition: transform 200ms ease-in-out;
 }
 
 .lock {
@@ -110,6 +118,45 @@ button {
    object-fit: cover;
 }
 
+.blur {
+   display: none;
+}
+
+.active {
+   transform: scale(1.03);
+   border-color: #0020ad;
+   border-bottom-width: 2px;
+}
+
+.valid {
+   border-color: #03c061;
+   border-bottom-width: 2px;
+}
+
+.invalid {
+   border-color: #fc2424;
+   border-bottom-width: 2px;
+}
+
+.input-group {
+   position: relative;
+}
+
+.indicator {
+   position: absolute;
+   display: flex;
+   bottom: -5px;
+   width: 100%;
+}
+
+.indicator > span {
+   display: block;
+   width: 33%;
+   height: 2.5px;
+   border-radius: 5px;
+   background-color: #fc2424;
+}
+
 @media (min-width: 720px) {
    html {
       font-size: 110%;
@@ -135,6 +182,7 @@ button {
    }
 
    .blur {
+      display: block;
       position: absolute;
       top: 0;
       left: 0;
@@ -147,6 +195,9 @@ button {
 
    .form-container {
       position: static;
+      min-width: 340px;
+      padding: 0;
+      padding-right: 0.5rem;
    }
 
    .vector {
@@ -157,5 +208,6 @@ button {
 @media (min-width: 1080px) {
    main {
       padding: 2.5rem;
+      padding-left: 1.5rem;
    }
 }

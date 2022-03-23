@@ -29,7 +29,7 @@
          </section>
          <section class="form-container">
             <h1>Sign up</h1>
-            <form spellcheck="false">
+            <form spellcheck="false" autocomplete="off">
 
                <div class="form-inputs">
                   <div class="input-group">
@@ -45,6 +45,11 @@
                   <div class="input-group">
                      <label for="password"><img class="lock" src="images/lock.svg" alt="lock"></label>
                      <input id="password" type="password" placeholder="Password" required />
+                     <div class="indicator">
+                        <span class="weak"></span>
+                        <span class="medium"></span>
+                        <span class="strong"></span>
+                     </div>
                   </div>
    
                   <div class="input-group">
