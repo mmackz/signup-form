@@ -126,6 +126,25 @@ document.querySelector("#password").addEventListener("input", (event) => {
    }
 });
 
+// shake button and invalid inputs when trying to submit with invalid/unfilled inputs
+document.querySelector("button").addEventListener("click", (event) => {
+   event.preventDefault();
+   document.querySelector("button").classList.add("shake");
+
+   document.querySelectorAll("input").forEach((input) => {
+      if (!input.classList.length || input.classList.contains("invalid")) {
+         input.classList.add("shake");
+      };
+      setTimeout(() => {
+         input.classList.remove("shake");
+      }, 600);
+   });
+
+   setTimeout(() => {
+      document.querySelector("button").classList.remove("shake");
+   }, 600);
+});
+
 function testStrength(password) {
    const passwordTest = passwordStrengthTest.test(password);
    if (passwordTest.strong) {
