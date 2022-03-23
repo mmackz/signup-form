@@ -214,11 +214,12 @@ button {
    padding: 0.25rem 0.4rem;
    min-width: max-content;
    position: absolute;
-   left: 100%;
+   right: 103.5%;
    background: rgba(255, 255, 255, 0.836);
    border: 1px solid var(--invalid);
    border-radius: 4px;
    animation: fade-in 750ms ease-in-out;
+   display: none;
 }
 
 .shake {
@@ -228,7 +229,7 @@ button {
 
 .fadeout {
    animation: fade-out 1000ms ease;
-   animation-delay: 1000ms;
+   animation-delay: 1500ms;
 }
 
 /* for animated checkmark */
@@ -344,6 +345,10 @@ button {
       clip-path: var(--mask);
    }
 
+   .error {
+      display: block;
+   }
+
    .form-container {
       position: static;
       min-width: 340px;
@@ -358,11 +363,25 @@ button {
 
 @media (min-width: 1080px) {
    main {
-      padding: 2.5rem;
-      padding-left: 1.5rem;
+      padding: 2.5rem 3rem;
+      padding-left: 1rem;
    }
 
    h1 {
       font-size: 2.25rem;
+   }
+
+   .error {
+      left: 100%;
+   }
+   
+   .vector {
+      max-width: 520px;
+   }
+}
+
+@media (min-width: 1320px) {
+   .error {
+      left: 100%;
    }
 }
