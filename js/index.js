@@ -48,7 +48,7 @@ placeStrengthMeter();
 // apply short timeout so that the blur mask is not applied until after UI loads
 setTimeout(() => {
    setBlurMask();
-}, 10);
+}, 250);
 
 // highlight form field on focus
 document.querySelectorAll(".input-group").forEach((group) => {
