@@ -43,8 +43,13 @@ window.addEventListener("resize", () => {
    setBlurMask();
    placeStrengthMeter();
 });
-setBlurMask();
 placeStrengthMeter();
+
+// apply short timeout so that the blur mask is not applied until after UI loads
+setTimeout(() => {
+   setBlurMask();
+}, 10);
+
 
 // highlight form field on focus
 document.querySelectorAll(".input-group").forEach((group) => {
