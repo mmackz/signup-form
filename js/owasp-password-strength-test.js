@@ -1,3 +1,5 @@
+// from https://github.com/nowsecure/owasp-password-strength-test
+
 /* globals define */
 (function (root, factory) {
   
