@@ -45,10 +45,10 @@ window.addEventListener("resize", () => {
 });
 placeStrengthMeter();
 
-// apply short timeout so that the blur mask is not applied until after UI loads
-setTimeout(() => {
+// apply blur mask after page finishes loading
+window.addEventListener('load', () => {
    setBlurMask();
-}, 250);
+ });
 
 // highlight form field on focus
 document.querySelectorAll(".input-group").forEach((group) => {
@@ -205,7 +205,7 @@ function validateInput(input) {
          break;
    }
    input.classList.add(valid ? "valid" : "invalid");
-   return Boolean(valid);
+   return valid;
 }
 
 function showError(input) {
