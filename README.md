@@ -4,7 +4,7 @@
   <img src="https://i.imgur.com/d6WcifD.png" width="600" alt="project pic">
 </p>
 <h2 align="center">
-<a href="https://mmackz.github.io/top-calculator/">DEMO</a>
+<a href="https://mmackz.github.io/signup-form/">DEMO</a>
 </h2>
 
 ### About the project
